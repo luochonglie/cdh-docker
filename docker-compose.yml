@@ -1,0 +1,19 @@
+version: '3'
+services:
+
+  zk:
+    build:
+      context: .
+      dockerfile: Dockerfile-zk
+    image: cdh:zk
+    container_name: zk 
+    extra_hosts:
+     - "hadoop2:172.21.0.2"
+     - "hadoop3:172.21.0.3"
+     - "hadoop4:172.21.0.4"
+     - "hadoop5:172.21.0.5"
+    privileged: true
+    volumes: 
+     - /home/data/zk/2/data:/data
+    command: bash -c "/usr/bin/zookeeper-server start-foreground /data/zk/conf/zoo.cfg"
+    #command: tail -f /data/zk/conf/zoo.cfg
