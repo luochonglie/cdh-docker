@@ -7,6 +7,7 @@ services:
       dockerfile: Dockerfile-zk
     image: cdh:zk
     container_name: zk 
+    hostname: zk
     extra_hosts:
      - "hadoop2:172.21.0.2"
      - "hadoop3:172.21.0.3"
@@ -16,4 +17,18 @@ services:
     volumes: 
      - /home/data/zk/2/data:/data
     command: bash -c "/usr/bin/zookeeper-server start-foreground /data/zk/conf/zoo.cfg"
-    #command: tail -f /data/zk/conf/zoo.cfg
+
+  hadoop-single:
+    build:
+      context: .
+      dockerfile: Dockerfile-hadoop-single
+    image: cdh:hadoop-single
+    container_name: hadoop-single
+    hostname: hadoop-single
+    privileged: true
+    volumes:
+     - /home/data/hadoop/s/data:/data
+     - /home/data/hadoop/s/data/hadoop/conf:/etc/alternatives/hadoop-conf
+    command: tail -f /data/f
+    entrypoint: /usr/sbin/init
+

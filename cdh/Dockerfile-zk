@@ -1,6 +1,8 @@
 from nimmis/java-centos:oracle-8-jdk
 
-RUN curl -o /etc/yum.repos.d/cloudera-cdh5.repo http://archive.cloudera.com/cdh5/redhat/7/x86_64/cdh/cloudera-cdh5.repo && \
+RUN     wget https://archive.cloudera.com/cdh5/redhat/7/x86_64/cdh/cloudera-cdh5.repo -P /etc/yum.repos.d/ && \
+	rpm --import https://archive.cloudera.com/cdh5/redhat/7/x86_64/cdh/RPM-GPG-KEY-cloudera && \
 	yum install -y zookeeper -y && \
-	yum install -y zookeeper-server 
+	yum install -y zookeeper-server && \
+	yum clean all 
 

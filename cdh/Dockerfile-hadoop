@@ -1,0 +1,9 @@
+from nimmis/java-centos:oracle-8-jdk
+
+RUN curl -o /etc/yum.repos.d/cloudera-cdh5.repo http://archive.cloudera.com/cdh5/redhat/7/x86_64/cdh/cloudera-cdh5.repo && \
+	yum install -y hadoop-yarn-resourcemanager && \
+	yum install -y hadoop-hdfs-namenode && \
+	yum install -y hadoop-yarn-nodemanager hadoop-hdfs-datanode hadoop-mapredu && \
+	yum install -y hadoop-mapreduce-historyserver hadoop-yarn-proxyserver && \
+	yum install -y hadoop-client && \
+	yum clean all
